@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useForm } from 'react-hook-form';
+
 import './App.css';
+import { dynamicForm } from './data';
+import FormInputs from './forms/FormInput';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const {
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm();
+
+	const formInput = Object.keys(dynamicForm).map((element: string) => {
+		return (
+			<FormInputs
+				control={control}
+				data={dynamicForm[element]}
+				element={element}
+				errors={errors}
+				key={element}
+			/>
+		);
+	});
+
+	const onSubmit = (data: any) => {
+		console.log(data);
+	};
+	return (
+		<div className='App'>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				{formInput}
+				<button type='submit'>Submit</button>
+			</form>
+		</div>
+	);
 }
 
 export default App;
