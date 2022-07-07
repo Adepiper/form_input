@@ -5,7 +5,8 @@ export const dynamicForm: DynamicForm = {
 		placeholder: 'Enter your first name',
 		defaultValue: '',
 		rules: {
-			required: false,
+			required: true,
+			minLength: 4,
 		},
 	},
 	lastName: {
@@ -14,7 +15,8 @@ export const dynamicForm: DynamicForm = {
 		placeholder: 'Enter your last name',
 		defaultValue: '',
 		rules: {
-			required: false,
+			required: true,
+			minLength: 4,
 		},
 	},
 	gender: {
@@ -23,7 +25,7 @@ export const dynamicForm: DynamicForm = {
 		options: ['male', 'female'],
 		defaultValue: '',
 		rules: {
-			required: false,
+			required: true,
 		},
 	},
 	profession: {
@@ -36,7 +38,7 @@ export const dynamicForm: DynamicForm = {
 		],
 		defaultValue: '',
 		rules: {
-			required: false,
+			required: true,
 		},
 	},
 	agree: {
@@ -49,6 +51,11 @@ export const dynamicForm: DynamicForm = {
 		},
 	},
 };
+
+export const errorMessages = (value?: string): { [key: string]: string } => ({
+	required: `${value} is required`,
+	minLength: `${value} is too short`,
+});
 
 export type DynamicForm = {
 	[key: string]: FormData;

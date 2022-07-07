@@ -25,6 +25,7 @@ function App() {
 
 	const onSubmit = (data: any) => {
 		console.log(data);
+		console.log(errors);
 	};
 	return (
 		<div className='App'>

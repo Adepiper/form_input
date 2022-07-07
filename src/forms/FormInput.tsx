@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form';
-import { FormData } from '../data';
+import { errorMessages, FormData } from '../data';
 import Input from './Input';
 
 const FormInputs = ({
@@ -7,16 +7,18 @@ const FormInputs = ({
 	data,
 	element,
 	errors,
+	className,
 }: {
 	control: any;
 	data: FormData;
 	element: string;
 	errors: any;
+	className?: string;
 }) => {
 	const { rules, defaultValue, label, type } = data;
 
 	return (
-		<div>
+		<div className={className}>
 			<label htmlFor={label}>{label}</label>
 			<Controller
 				name={element}
@@ -35,7 +37,9 @@ const FormInputs = ({
 					</>
 				)}
 			/>
-			{errors[element] && <p>Requried</p>}
+			{errors[element] && (
+				<p>{errorMessages(label)[errors[element]['type']]}</p>
+			)}
 		</div>
 	);
 };
